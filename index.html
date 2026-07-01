@@ -132,6 +132,10 @@ textarea.field:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px
 .sem-auto-wrap{display:flex;flex-direction:column;gap:10px}
 .sem-auto-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .sem-auto-cap{font-size:12px;font-weight:700;color:var(--azul-mid);text-transform:uppercase;letter-spacing:.04em;min-width:130px}
+.reflexion{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:var(--gris100);border:1px dashed var(--gris300)}
+.reflexion-cap{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--gris-tx);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.reflexion-cap svg{width:15px;height:15px;stroke:var(--gris-tx)}
+.reflexion-q{font-size:14px;line-height:1.5;color:var(--navy);font-style:italic}
 
 .actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:34px 0 10px}
 .btn{font-family:var(--font-body);font-weight:700;font-size:15px;padding:13px 30px;border-radius:var(--radius-pill);cursor:pointer;border:none;display:inline-flex;align-items:center;gap:9px;transition:.18s}
@@ -268,7 +272,7 @@ const TEXTOS={
     },
     msg:{
       verde:"¡Felicitaciones! Las ECC ya están vivas en su comunidad. Sigamos potenciándolas para que cada espacio sea una oportunidad de encuentro y bienestar.",
-      amarillo:"¡Buen comienzo! Los invitamos a potenciar las ECC en más espacios este segundo semestre: recreos, reuniones, asambleas y otros contextos. Cada oportunidad de práctica fortalece la convivencia.",
+      amarillo:"¡Buen comienzo! Los invitamos a incorporar las ECC que faltan en más espacios este segundo semestre: recreos, reuniones, asambleas y otros contextos. Cada oportunidad de práctica fortalece la convivencia.",
       rojo:"Los invitamos a potenciar las ECC en los distintos contextos de la comunidad —otras asignaturas, recreos, reuniones de equipo y de apoderados, asambleas—. Cada espacio cuenta para construir una mejor convivencia."
     }
   },
@@ -280,7 +284,7 @@ const TEXTOS={
     },
     msg:{
       verde:"¡Felicitaciones! La familia se está sumando al proceso. Sigamos potenciando este vínculo, clave para el desarrollo socioemocional de cada estudiante.",
-      amarillo:"¡Buen comienzo! Una sugerencia que ayuda mucho es calendarizar los recursos para asegurar su uso este segundo semestre. ¡Familia y escuela avanzan juntas!",
+      amarillo:"¡Buen comienzo! Los invitamos a sumar los recursos que faltan este segundo semestre. Una sugerencia que ayuda mucho es calendarizarlos para asegurar su uso. ¡Familia y escuela avanzan juntas!",
       rojo:"Los invitamos a potenciar los recursos del componente Familia en su comunidad. Calendarizarlos desde ya puede ayudar a que la familia sea parte activa del proceso."
     }
   },
@@ -292,7 +296,7 @@ const TEXTOS={
     },
     msg:{
       verde:"¡Felicitaciones! El programa está echando raíces en su comunidad. Cuando el equipo cree en lo que implementa, los estudiantes lo notan.",
-      amarillo:"¡Buen comienzo! La adherencia se construye paso a paso. Mientras más vivo esté el programa en el equipo, más llega al aula.",
+      amarillo:"¡Buen comienzo! La adherencia se construye paso a paso. Este segundo semestre los invitamos a sumar las estrategias que quedan pendientes: mientras más vivo esté el programa en el equipo, más llega al aula.",
       rojo:"Los invitamos a potenciar la adherencia en su comunidad. Que el equipo se apropie del programa es lo que lo sostiene en el tiempo."
     }
   },
@@ -300,14 +304,13 @@ const TEXTOS={
     sem:{
       verde:"Hemos logrado realizar los acompañamientos que nos propusimos a comienzos de año.",
       amarillo:"Hemos logrado realizar parcialmente los acompañamientos que nos propusimos a comienzos de año.",
-      rojo:"Este semestre los invitamos a realizar los acompañamientos que nos propusimos a comienzos de año.",
-      nc:"Este semestre no contemplamos acompañamientos al aula."
+      rojo:"Este semestre los invitamos a realizar los acompañamientos que nos propusimos a comienzos de año."
     },
     msg:{
       verde:"¡Felicitaciones! El acompañamiento al aula es lo que eleva la calidad de cada clase Trabün. Sigamos potenciándolo para crecer juntos.",
-      amarillo:"¡Buen comienzo! Cada acompañamiento fortalece la práctica docente. Los animamos a potenciarlos este segundo semestre.",
+      amarillo:"¡Buen comienzo! Cada acompañamiento fortalece la práctica docente. Los invitamos a completar los que faltan este segundo semestre para acompañar a todo el equipo.",
       rojo:"Los invitamos a potenciar la calidad a través del acompañamiento en las clases Trabün. Acompañar a quienes implementan es clave para que se sientan apoyados y sigan creciendo.",
-      nc:"Este semestre es una gran oportunidad para comenzar con el acompañamiento al aula. Aunque sea de forma gradual, es un paso que fortalece a todo el equipo."
+      metacero:"Este semestre su comunidad no definió acompañamientos al aula. Los invitamos a considerar esta práctica: observar y acompañar a quienes implementan fortalece la confianza del equipo y eleva la calidad de cada clase Trabün. Aunque sea de forma gradual, dar el primer paso ya marca una diferencia."
     }
   },
   fidelidad:{
@@ -318,7 +321,7 @@ const TEXTOS={
     },
     msg:{
       verde:"¡Felicitaciones! Implementar con fidelidad asegura que la esencia de Trabün llegue a cada estudiante. Sigamos potenciándola en las clases.",
-      amarillo:"¡Buen comienzo! Sigamos potenciando la fidelidad en las clases Trabün: cuidar la esencia del programa es lo que hace la diferencia en el aula.",
+      amarillo:"¡Buen comienzo! Los invitamos a seguir fortaleciendo lo que queda pendiente en las clases Trabün: cuidar la esencia del programa es lo que hace la diferencia en el aula.",
       rojo:"Los invitamos a potenciar la fidelidad en las clases Trabün. Mantener vivos el pilar lúdico-vinculante y la estructura de la clase es lo que asegura que llegue a los estudiantes."
     }
   }
@@ -366,11 +369,11 @@ const DIMS={
    ico:'<path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',
    comps:{ASE:[
      {id:"fidelidad",t:"Foco de fidelidad",tag:"Foco",tagc:"--rojo",
-      avanceHint:"Cuéntanos cómo se trabajó el foco elegido (pilar lúdico vinculante, adaptaciones de la clase o ambos) y su impacto.",
+      avanceHint:"Cuéntanos cómo se trabajó el foco elegido (pilar lúdico vinculante, momentos de la clase o ambos) y su impacto.",
       paso:"¿Con qué tanta fidelidad se está implementando el foco escogido? ¿Mantendrán ese foco o lo ampliarán el segundo semestre?"}],
      REL:[
      {id:"fidelidad",t:"Foco de fidelidad",tag:"Foco",tagc:"--rojo",
-      avanceHint:"Cuéntanos cómo se trabajó el foco elegido (pilar lúdico vinculante, adaptaciones de la clase o ambos) y su impacto.",
+      avanceHint:"Cuéntanos cómo se trabajó el foco elegido (pilar lúdico vinculante, momentos de la clase o ambos) y su impacto.",
       paso:"¿Con qué tanta fidelidad se está implementando el foco escogido? ¿Mantendrán ese foco o lo ampliarán el segundo semestre?"}]}}
 };
 const I={meta:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -525,12 +528,16 @@ function renderDims(){
       }
       h+=`<div class="comp"><div class="comp-title">${c.t}<span class="comp-tag" style="background:${tagcol}">${c.tag}</span></div>`;
       /* READ-ONLY preloaded by JdP */
+      // unidad para números (clases / acompañamientos)
+      const UNI = (c.id==='cobertura'||c.id==='liturgicas') ? ' clases'
+                : (c.id==='acompdoc') ? ' acompañamientos' : '';
+      const withUnit=(val)=>{ const v=(val||'').trim(); if(!v) return v; return (/^\d+$/.test(v)&&UNI)? v+UNI : v; };
       const hasA=(meta.a||'').trim(), hasS=(meta.s||'').trim();
       let metaInner;
       if(hasA&&hasS){
-        metaInner=`<div class="metasplit"><span class="ms"><i>Anual</i>${meta.a}</span><span class="ms"><i>Semestral</i>${meta.s}</span></div>`;
+        metaInner=`<div class="metasplit"><span class="ms"><i>Anual</i>${withUnit(meta.a)}</span><span class="ms"><i>Semestral</i>${withUnit(meta.s)}</span></div>`;
       }else if(hasA||hasS){
-        metaInner=`<div class="v">${meta.a||meta.s}</div>`;
+        metaInner=`<div class="v">${withUnit(meta.a||meta.s)}</div>`;
       }else{
         metaInner=`<div class="v empty">La definirá tu contraparte</div>`;
       }
@@ -538,45 +545,44 @@ function renderDims(){
         <div class="ro meta"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.meta}</svg>Meta acordada</div>
           ${metaInner}</div>
         <div class="ro efs"><div class="lab"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.efs}</svg>Resultado a la fecha</div>
-          <div class="v ${efs?'':'empty'}">${efs||'Sin dato cargado'}</div></div>
+          <div class="v ${efs?'':'empty'}">${efs?withUnit(efs):'Sin dato cargado'}</div></div>
       </div>`;
       /* SEMÁFORO Y MENSAJES */
       const TX=TEXTOS[c.id];
-      if(TX && TX.auto){
-        /* Cobertura / Litúrgicas: DOS semáforos automáticos (clases y representatividad) */
+      // ¿Acompañamiento con meta 0? -> sin semáforo, solo invitación
+      const metaNum=parseInt((meta.a||meta.s||'').trim(),10);
+      const acompMetaCero = (c.id==='acompdoc' && metaNum===0);
+      if(acompMetaCero){
+        h+=`<div class="msg-box msg-amarillo">${TX.msg.metacero}</div>`;
+      } else if(TX && TX.auto){
+        /* Cobertura: dos semáforos (clases + representatividad). Litúrgicas: solo clases */
         const calc=calcCobertura(meta, efs, c.id);
         if(calc){
           let chips='';
           chips+=`<div class="sem-auto-row"><span class="sem-auto-cap">Clases</span><div class="sem-auto sem-${calc.clases.color}"><span class="sem-dot"></span><span>${calc.clases.label}</span></div></div>`;
-          if(calc.rep){
+          if(calc.rep && c.id==='cobertura'){
             chips+=`<div class="sem-auto-row"><span class="sem-auto-cap">Representatividad</span><div class="sem-auto sem-${calc.rep.color}"><span class="sem-dot"></span><span>${calc.rep.label}</span></div></div>`;
           }
-          h+=`<div class="row"><div class="row-label"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.estado}</svg>Estado automático de la cobertura</div>
+          h+=`<div class="row"><div class="row-label"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.estado}</svg>Estado automático según los resultados</div>
             <div class="sem-auto-wrap">${chips}</div></div>`;
           h+=`<div class="msg-box msg-${calc.clases.color}">${TX.msg[calc.clases.color]}</div>`;
         }
       } else if(TX){
-        /* Componentes que marca el colegio, con frases nuevas + mensaje al elegir */
+        /* Componentes que marca el colegio */
         const cur=aval(base+'_estado');
         let botones='';
         ['verde','amarillo','rojo'].forEach(col=>{
           const on=cur===col?' on':'';
           botones+=`<button class="sem-btn sem-frase${on}" data-v="${col}" type="button"><span class="sem-dot"></span>${TX.sem[col]}</button>`;
         });
-        if(TX.sem.nc){ // opción extra (Calidad)
-          const on=cur==='nc'?' on':'';
-          botones+=`<button class="sem-btn sem-frase sem-nc${on}" data-v="nc" type="button"><span class="sem-dot"></span>${TX.sem.nc}</button>`;
-        }
-        h+=`<div class="row"><div class="row-label"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.estado}</svg>¿Cómo vamos? Marquen la opción que mejor los representa</div>
+        h+=`<div class="row"><div class="row-label"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.estado}</svg>Marquen el estado de este componente en su comunidad</div>
           <div class="semaforo semaforo-col" data-sem="${base}_estado" data-comp="${c.id}">${botones}</div>
           <div class="msg-box" data-msg="${base}" style="display:none"></div></div>`;
       }
-      if(!c.sinAvance){
-        h+=`<div class="row"><div class="row-label"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.avance}</svg>Avance real <span class="qhint">${avanceHint}</span></div>
-        <textarea class="field" data-k="${base}_avance" placeholder="Cuéntanos qué ha pasado hasta ahora..."></textarea></div>`;
+      /* PREGUNTA PARA REFLEXIONAR (visible, sin responder) */
+      if(paso){
+        h+=`<div class="reflexion"><div class="reflexion-cap"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.paso}</svg>Para reflexionar en su comunidad</div><div class="reflexion-q">${paso}</div></div>`;
       }
-      h+=`<div class="row" style="margin-bottom:0"><div class="row-label"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round">${I.paso}</svg>Próximos pasos <span class="qhint">${paso}</span></div>
-        <textarea class="field" data-k="${base}_paso" placeholder="¿Qué haremos en el segundo semestre?"></textarea></div>`;
       h+=`</div>`;
     });
     h+=`</div>`;card.innerHTML=h;contentEl.appendChild(card);
