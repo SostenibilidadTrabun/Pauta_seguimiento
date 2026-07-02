@@ -92,6 +92,10 @@ main{max-width:1000px;margin:0 auto;padding:8px 24px 60px}
 .ro .ms i{font-style:normal;font-size:10.5px;font-weight:700;color:var(--azul-mid);text-transform:uppercase;letter-spacing:.04em;margin-bottom:1px}
 .ro.efs{background:var(--celeste-cl)}
 .ro.meta{background:#DBEAF2}
+.ro .rec-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ro .rec-list li{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;font-size:14px}
+.ro .rec-list .rec-n{color:var(--navy);font-weight:600}
+.ro .rec-list .rec-uso{font-size:12.5px;font-weight:700;color:#3B6D11;background:var(--verde-cl);border-radius:10px;padding:1px 9px}
 
 .row{margin-bottom:15px}
 .row-label{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:6px}
@@ -240,7 +244,7 @@ footer .due{font-weight:700;color:var(--amarillo);font-size:14px;margin-top:8px}
    Debe empezar con https://script.google.com/macros/s/.../exec
    Mientras esté vacía, el botón "Enviar" usará el correo como respaldo.
 =================================================================== */
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbx6ys21DE6CoE8v-guH9-YtpdqPKkLkx2_VqHJ-e-DEiOLKH8BFRPag7qyxjE6fTL88fA/exec";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbz2cOk53nCtvpICjwL2RyxC3q7ndg4PpztnamL39bD_1_wL-s95usm4fDwYT64gP6c2/exec";
 
 /* ============ TEXTOS DE SEMÁFORO Y MENSAJES (aprobados) ============
    Para cada componente:
@@ -534,7 +538,24 @@ function renderDims(){
       const withUnit=(val)=>{ const v=(val||'').trim(); if(!v) return v; return (/^\d+$/.test(v)&&UNI)? v+UNI : v; };
       const hasA=(meta.a||'').trim(), hasS=(meta.s||'').trim();
       let metaInner;
-      if(hasA&&hasS){
+      // Familia y ECC: la meta es una lista de recursos separados por "·".
+      // En Familia, cada recurso puede traer su uso SdC como "Recurso :: uso".
+      if((c.id==='familia'||c.id==='ecc') && (hasA||hasS)){
+        const raw=(meta.a||meta.s||'');
+        const items=raw.split('·').map(s=>s.trim()).filter(Boolean);
+        if(items.length){
+          let lis='';
+          items.forEach(it=>{
+            const parts=it.split('::').map(s=>s.trim());
+            const nombre=parts[0];
+            const uso=parts.length>1?parts[1]:'';
+            lis+=`<li><span class="rec-n">${nombre}</span>${uso?`<span class="rec-uso">${uso}</span>`:''}</li>`;
+          });
+          metaInner=`<ul class="rec-list">${lis}</ul>`;
+        }else{
+          metaInner=`<div class="v empty">La definirá tu contraparte</div>`;
+        }
+      }else if(hasA&&hasS){
         metaInner=`<div class="metasplit"><span class="ms"><i>Anual</i>${withUnit(meta.a)}</span><span class="ms"><i>Semestral</i>${withUnit(meta.s)}</span></div>`;
       }else if(hasA||hasS){
         metaInner=`<div class="v">${withUnit(meta.a||meta.s)}</div>`;
@@ -645,7 +666,20 @@ function buildResponse(){
   Object.keys(DIMS).forEach(dk=>{
     (DIMS[dk].comps[program]||[]).forEach(c=>{
       const base=dk+'_'+c.id;
-      out.resp[base]={estado:aval(base+'_estado'),avance:aval(base+'_avance'),paso:aval(base+'_paso')};
+      const TX=TEXTOS[c.id];
+      if(TX && TX.auto){
+        // Cobertura / Litúrgicas: estado calculado automáticamente (clases y, en cobertura, representatividad)
+        const calc=calcCobertura(null,null,c.id);
+        if(calc){
+          const o={estado:calc.clases.color, autoClases:calc.clases.label};
+          if(calc.rep && c.id==='cobertura'){ o.autoRep=calc.rep.label; o.repColor=calc.rep.color; }
+          out.resp[base]=o;
+        }else{
+          out.resp[base]={estado:''};
+        }
+      }else{
+        out.resp[base]={estado:aval(base+'_estado')};
+      }
     });
   });
   return out;
